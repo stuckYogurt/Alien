@@ -7,7 +7,7 @@ Table::Table() {
     texture_tab = std::make_unique<Texture>();
     sprite_tab = std::make_unique<Sprite>();
 
-    texture_tab->loadFromFile("../images/tablice.png");
+    texture_tab->loadFromFile("./images/tablice.png");
     sprite_tab->setTexture(*texture_tab);
     sprite_tab->setPosition(50, -83);
     sprite_tab->setScale(0.5, 0.8);

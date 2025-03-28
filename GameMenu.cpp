@@ -8,11 +8,11 @@ GameMenu::GameMenu(std::shared_ptr<RenderWindow> wind) {
     for (auto i = 0; i < 5; i++)
         textures.emplace_back(make_unique<Texture>());
 
-    textures[0]->loadFromFile("../images/planet_2.png");
-    textures[1]->loadFromFile("../images/planet_1.png");
-    textures[2]->loadFromFile("../images/planet_3.png");
-    textures[3]->loadFromFile("../images/CHOOSE_A_PLANET.png");
-    textures[4]->loadFromFile("../images/background_4.png");
+    textures[0]->loadFromFile("./images/planet_2.png");
+    textures[1]->loadFromFile("./images/planet_1.png");
+    textures[2]->loadFromFile("./images/planet_3.png");
+    textures[3]->loadFromFile("./images/CHOOSE_A_PLANET.png");
+    textures[4]->loadFromFile("./images/background_4.png");
 
     //спрайты
     for (auto i = 0; i < 5; i++)

@@ -2,7 +2,7 @@
 // Created by sageblatt on 12.04.2022.
 //
 #include "Game.h"
-
+#include "json_handling.h"
 
 Game* Game::instance = nullptr;
 
@@ -25,9 +25,16 @@ Game::Game() {
 }
 
 void Game::init() {
-    window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1376, 768), "Alien");
+    auto settings = json_handling::getJsonDocument("./config/settings.json");
+
+    window = std::make_shared<sf::RenderWindow>(sf::VideoMode(
+            (*settings)["width"].GetInt(), (*settings)["height"].GetInt()), "Alien");
+
+    // avoiding resources over usage
+    window->setFramerateLimit((*settings)["fps"].GetInt());
+
     load_texture = std::make_unique<Texture>();
-    load_texture->loadFromFile("../images/loading.png");
+    load_texture->loadFromFile("./images/loading.png");
     load_sprite = make_unique<Sprite>(*load_texture);
 
     window->clear();

@@ -9,7 +9,7 @@ damage(dmg), for_hero(for_hero_) {
     timer = std::make_unique<Clock>();
     timer->restart();
 
-    texture.loadFromFile("../images/m_bullet.png");
+    texture.loadFromFile("./images/m_bullet.png");
     sprite.setTexture(texture);
 
     if (dir > 0)

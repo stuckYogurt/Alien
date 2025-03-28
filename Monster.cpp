@@ -1,5 +1,6 @@
 ﻿#include "Monster.h"
 
+
 Monster::Monster(float sp_x, float x0, int wind_w, int wind_h, double health, float cd):
 COOLDOWN(cd) {
     timer = std::make_unique<Clock>();
@@ -37,7 +38,7 @@ COOLDOWN(cd) {
 
     on_ground = false;
 
-    texture.loadFromFile("../images/ALIEN.png");
+    texture.loadFromFile("./images/ALIEN.png");
     sprite.setTexture(texture);
 
     sprite.setPosition(x, y);
@@ -57,6 +58,11 @@ void Monster::move() {
         is_red = false;
     }
 
+    if (sprite.getPosition().y >= (float)(window_height - fall_vec[0].height)) {
+        on_ground = true;
+        speed_y = 0;
+    }
+
     if (!on_ground) {
         current_frame += FRAME_RATIO * dt;
 
@@ -72,10 +78,7 @@ void Monster::move() {
         speed_y = speed_y - g_accel * dt;
     }
 
-    if (sprite.getPosition().y >= (float)(window_height - fall_vec[0].height)) {
-        on_ground = true;
-        speed_y = 0;
-    }
+
 
     if (on_ground)
         return;
