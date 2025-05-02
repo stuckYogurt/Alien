@@ -3,20 +3,25 @@
 //
 #include "AudioEngine.h"
 #include "Game.h"
+#include "json_handling.h"
 
 
 AudioEngine::AudioEngine() {
     timer = std::make_unique<sf::Clock>();
+
+    auto settings = json_handling::getJsonDocument("./config/settings.json");
+    volume = (*settings)["volume"].GetFloat();
 
     fade_flag = {0, 0};
 
     for (auto i = 0; i < TRACKS_AMOUNT; i++)
         tracks[i] = std::make_unique<sf::Music>();
 
-    tracks[0]->openFromFile("../audio/StartingMenu.ogg");
-    tracks[1]->openFromFile("../audio/MainMenu.ogg");
-    tracks[2]->openFromFile("../audio/Lor.ogg");
-    tracks[3]->openFromFile("../audio/Fight.ogg");
+    // кто-то схалтурил :)
+    tracks[0]->openFromFile("./audio/StartingMenu.ogg");
+    tracks[1]->openFromFile("./audio/MainMenu.ogg");
+    tracks[2]->openFromFile("./audio/Lor.ogg");
+    tracks[3]->openFromFile("./audio/Fight.ogg");
 
     current_track = STARTINGMENU;
 
@@ -33,7 +38,7 @@ void AudioEngine::fade(int next_song) {
     auto t = timer->getElapsedTime().asSeconds();
 
     while (t < FADE_LEN) {
-        tracks[current_track]->setVolume(100.f - 100.f * t / FADE_LEN);
+        tracks[current_track]->setVolume(volume - volume * t / FADE_LEN);
         t = timer->getElapsedTime().asSeconds();
     }
 
@@ -46,13 +51,13 @@ void AudioEngine::fade(int next_song) {
 
     while (t < FADE_LEN)
     {
-        tracks[current_track]->setVolume(100.f * t/FADE_LEN);
+        tracks[current_track]->setVolume(volume * t/FADE_LEN);
         t = timer->getElapsedTime().asSeconds();
     }
 }
 
 void AudioEngine::run() {
-    tracks[current_track]->setVolume(100);
+    tracks[current_track]->setVolume(volume);
     tracks[current_track]->play();
 
     while(Game::getInstance()->getWindow()->isOpen()) {

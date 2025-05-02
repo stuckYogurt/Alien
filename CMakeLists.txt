@@ -23,6 +23,7 @@ add_executable(Alien
         Level.cpp
         Bullet.cpp
         Health.cpp
+        json_handling.cpp
         main.cpp)
 
 
@@ -30,6 +31,26 @@ include_directories(./images)
 include_directories(./audio)
 include_directories(./fonts)
 
-find_package(SFML 2.5 COMPONENTS graphics window system audio REQUIRED)
+if (APPLE)
+    set(SFML_DIR "/opt/homebrew/Cellar/sfml@2/2.6.2_1/lib/cmake/SFML")
+endif (APPLE)
+
+find_package(SFML 2.6 COMPONENTS system window graphics audio network REQUIRED)
 
 target_link_libraries(Alien sfml-graphics sfml-window sfml-system sfml-audio)
+
+add_custom_command(TARGET Alien POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/config $<TARGET_FILE_DIR:Alien>/config)
+
+add_custom_command(TARGET Alien POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/audio $<TARGET_FILE_DIR:Alien>/audio)
+
+add_custom_command(TARGET Alien POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/fonts $<TARGET_FILE_DIR:Alien>/fonts)
+
+add_custom_command(TARGET Alien POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/images $<TARGET_FILE_DIR:Alien>/images)

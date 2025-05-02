@@ -30,6 +30,8 @@ private:
 
     void fade(int next_song);
 
+    float volume;
+
 public:
     AudioEngine();
 

@@ -3,5 +3,10 @@
 //
 #include "Menu.h"
 
-Menu::Menu() = default;
+Menu::Menu() {
+    // Limiting fps to avoid excessive hardware usage
+//    this->fps = 60;
+//
+//    window->setFramerateLimit(this->fps);
+};
 Menu::~Menu() = default;

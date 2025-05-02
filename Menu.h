@@ -15,6 +15,7 @@ protected:
     std::vector <std::unique_ptr <sf::Texture>> textures;
     std::vector <std::unique_ptr <sf::Sprite>> sprites;
 
+    unsigned short fps;
 public:
     Menu();
     virtual int run() = 0;

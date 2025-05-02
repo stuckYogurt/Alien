@@ -7,10 +7,10 @@ MainMenu::MainMenu(std::shared_ptr<RenderWindow> wind) {
     for (auto i = 0; i < 4; i++)
         textures.emplace_back(make_unique<Texture>());
 
-    textures[0]->loadFromFile("../images/CONTINUE.png");
-    textures[1]->loadFromFile("../images/EXIT.png");
-    textures[2]->loadFromFile("../images/NEW_GAME.png");
-    textures[3]->loadFromFile("../images/background_4.png");
+    textures[0]->loadFromFile("./images/CONTINUE.png");
+    textures[1]->loadFromFile("./images/EXIT.png");
+    textures[2]->loadFromFile("./images/NEW_GAME.png");
+    textures[3]->loadFromFile("./images/background_4.png");
 
     //спрайты
     for (auto i = 0; i < 4; i++)

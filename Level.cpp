@@ -29,7 +29,7 @@ Level::Level(std::shared_ptr<RenderWindow> wind, Planets num) {
     wave_timer->restart();
 
     font = std::make_unique<Font>();
-    font->loadFromFile("../fonts/tab.ttf");
+    font->loadFromFile("./fonts/tab.ttf");
 
     wave_text = std::make_unique<Text>("Wave", *font);
     wave_text->setFillColor(Color::Yellow);
@@ -54,24 +54,24 @@ Level::Level(std::shared_ptr<RenderWindow> wind, Planets num) {
 
     switch (num) {
         case PURPLE:
-            fname = "../images/pink_planet.png";
-            won_name = "../images/pink_win.png";
+            fname = "./images/pink_planet.png";
+            won_name = "./images/pink_win.png";
             monster_parameters = {200, 100, 2, 50};
             break;
         case FIRE:
-            fname = "../images/fire_planet.png";
-            won_name = "../images/fire_win.png";
+            fname = "./images/fire_planet.png";
+            won_name = "./images/fire_win.png";
             monster_parameters = {225, 150, 1.5, 75};
             break;
         case ELECTRIC:
-            fname = "../images/electric_planet.png";
-            won_name = "../images/electric_win.png";
+            fname = "./images/electric_planet.png";
+            won_name = "./images/electric_win.png";
             monster_parameters = {250, 200, 1, 100};
             break;
     }
 
     textures[0]->loadFromFile(fname);
-    textures[1]->loadFromFile("../images/game_over.png");
+    textures[1]->loadFromFile("./images/game_over.png");
     textures[2]->loadFromFile(won_name);
 
     for (auto i = 0; i < 3; i++)
